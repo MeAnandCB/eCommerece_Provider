@@ -6,6 +6,7 @@ import 'package:mechine_test_sample/Screens/CategoryScreen.dart';
 import 'package:mechine_test_sample/Screens/Product_Details.dart';
 import 'package:mechine_test_sample/Screens/cart_Screen.dart';
 import 'package:mechine_test_sample/cart/cart.dart';
+import 'package:mechine_test_sample/widgets/carosel.dart';
 import 'package:provider/provider.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
@@ -55,6 +56,11 @@ class HomeScreen extends StatelessWidget {
                   )
                 ],
               ),
+              SizedBox(
+                height: 15,
+              ),
+              CourselSliderContainer(
+                  FirstCourselSliderList: FirstCourselSliderList),
               SizedBox(
                 height: 20,
               ),
@@ -289,3 +295,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+List FirstCourselSliderList = [
+  'images/1.jpg',
+  'images/2.jpg',
+  'images/3.jpg',
+];
