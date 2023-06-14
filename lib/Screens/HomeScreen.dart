@@ -169,116 +169,97 @@ class HomeScreen extends StatelessWidget {
                       return GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          childAspectRatio: 0.75,
+                          childAspectRatio: .75,
+                          mainAxisSpacing: 5,
+                          crossAxisSpacing: 5,
                         ),
                         itemCount: products.length,
                         itemBuilder: (context, index) {
                           final product = products[index];
-                          return StaggeredGridView.countBuilder(
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            padding: EdgeInsets.all(15),
-                            staggeredTileBuilder: (index) =>
-                                StaggeredTile.count(2, index.isOdd ? 3.5 : 3.5),
-                            crossAxisCount: 2,
-                            itemCount: 6,
-                            mainAxisSpacing: 5,
-                            crossAxisSpacing: 5,
-                            itemBuilder: (context, index) => GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetailScreen(
-                                        productId: product.id),
-                                  ),
-                                );
-                              },
-                              child: Card(
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(
+                                      productId: product.id),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
                                 color: ShopBackground1,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(7),
-                                      child: Stack(
-                                        children: [
-                                          Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                10,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(17),
-                                              color: Colors.white,
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  product.image,
-                                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(7),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              7,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(17),
+                                            color: Colors.white,
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                product.image,
                                               ),
                                             ),
                                           ),
-                                          Container(),
-                                          Positioned(
-                                              bottom: 5,
-                                              right: 5,
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 18,
-                                                  ),
-                                                  Text("4.5",
-                                                      style: TextStyle(
-                                                          color: Color.fromARGB(
-                                                              255, 257, 27, 27),
-                                                          fontSize: 12)),
-                                                ],
-                                              ))
-                                        ],
-                                      ),
+                                        ),
+                                        Positioned(
+                                            bottom: 5,
+                                            right: 5,
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                  size: 18,
+                                                ),
+                                                Text('${product.rating}',
+                                                    style: TextStyle(
+                                                        color: Color.fromARGB(
+                                                            255, 257, 27, 27),
+                                                        fontSize: 12)),
+                                              ],
+                                            ))
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            product.title,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          product.title,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          SizedBox(height: 4),
-                                          Text('\$${product.price}'),
-                                          SizedBox(height: 8),
-                                          Text(
-                                            product.category,
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                            ),
+                                        ),
+                                        SizedBox(height: 4),
+                                        Text('\$${product.price}'),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          product.category,
+                                          style: TextStyle(
+                                            color: Colors.grey,
                                           ),
-                                          SizedBox(height: 8),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              cart.addToCart(product);
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                    content:
-                                                        Text('Added to cart')),
-                                              );
-                                            },
-                                            child: Text('Add to Cart'),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                        SizedBox(height: 8),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           );
